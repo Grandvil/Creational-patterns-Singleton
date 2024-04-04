@@ -8,7 +8,6 @@ public class Logger {
     private static Logger logger;
     private SimpleDateFormat sdf;
     private TimeZone timeZone;
-    private Date currentDate;
 
     private Logger() {
         timeZone = TimeZone.getTimeZone("Europe/Moscow");
@@ -16,11 +15,8 @@ public class Logger {
     }
 
     public void log(String msg) {
-        if (currentDate == null) {
-            Calendar calendar = Calendar.getInstance(timeZone);
-            currentDate = calendar.getTime();
-        }
-
+        Calendar calendar = Calendar.getInstance(timeZone);
+        Date currentDate = calendar.getTime();
         String formattedDateTime = sdf.format(currentDate);
         System.out.println("[" + formattedDateTime + " " + num++ + "] " + msg);
     }

@@ -12,9 +12,22 @@ public class Main {
         logger.log("Просим пользователя ввести входные данные для списка");
 
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Введите размер списка: ");
-        int size = scanner.nextInt();
+        while (!scanner.hasNextInt()) {
+            logger.log("Пользователь ввёл некорректные данные, просим его ввести их заново");
+            System.out.println("Ошибка! Введите число, а не текст: ");
+            scanner.next(); // Очистка буфера сканера
+        }
+        int size = scanner.nextInt(); // Считываем правильный ввод
+
+
         System.out.println("Введите верхнюю границу для значений: ");
+        while (!scanner.hasNextInt()) {
+            logger.log("Пользователь ввёл некорректные данные, просим его ввести их заново");
+            System.out.println("Ошибка! Введите число, а не текст: ");
+            scanner.next(); // Очистка буфера сканера
+        }
         int maxValue = scanner.nextInt();
 
         logger.log("Создаём и наполняем список");
@@ -27,7 +40,14 @@ public class Main {
 
         logger.log("Просим пользователя ввести входные данные для фильтрации");
         System.out.println("Введите порог для фильтра: ");
+        while (!scanner.hasNextInt()) {
+            logger.log("Пользователь ввёл некорректные данные, просим его ввести их заново");
+            System.out.println("Ошибка! Введите число, а не текст: ");
+            scanner.next(); // Очистка буфера сканера
+        }
         int treshold = scanner.nextInt();
+
+        scanner.close();
 
         Filter filter = new Filter(treshold);
         List<Integer> resultList = filter.filterOut(randomList);
